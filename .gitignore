@@ -1,0 +1,39 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Django files
+*.log
+*.sqlite3
+*.pot
+*.pyc
+
+# Django migrations
+*/migrations/
+
+# Virtual environment directories
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# IDE/editor directories and files
+.idea/
+.vscode/
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
+
+# Selenium 관련 캐시 파일들
+selenium_cache/
+
+# ChromeDriver logs (if you are using ChromeDriver with Selenium)
+chromedriver.log
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
