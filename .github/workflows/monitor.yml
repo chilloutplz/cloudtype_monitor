@@ -1,0 +1,15 @@
+name: Monitor CloudType
+on:
+  schedule:
+    - cron: "*/30 * * * *"  # 30분마다 실행 (UTC 시간 기준)
+  workflow_dispatch:        # 수동 실행 옵션 추가
+
+jobs:
+  call-render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Service
+        run: |
+          curl -s -X GET "https://your-render-service.onrender.com/monitor"
+        env:
+          RENDER_URL: ${{ secrets.RENDER_URL }}  # 보안을 위해 URL을 Secrets에 저장
