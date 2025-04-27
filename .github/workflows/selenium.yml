@@ -34,9 +34,9 @@ jobs:
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
 
-      - name: Run Selenium script
+      - name: Run cloudtype_monitor script
         run: |
-          python3 selenium_script.py
+          python3 cloudtype_monitor.py
         env:
           DISPLAY: :99.0
           CHROME_BIN: /usr/bin/google-chrome-stable
