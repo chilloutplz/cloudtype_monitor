@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y python3-pip wget curl unzip
+          sudo apt install -y python3-pip wget curl unzip xvfb
           pip3 install selenium
 
       - name: Install Google Chrome
@@ -33,6 +33,11 @@ jobs:
           wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
+
+      - name: Start Xvfb
+        run: |
+          Xvfb :99 -screen 0 1280x1024x24 &
+          export DISPLAY=:99
 
       - name: Run cloudtype_monitor script
         run: |
