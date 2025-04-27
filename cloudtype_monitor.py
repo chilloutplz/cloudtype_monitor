@@ -7,7 +7,11 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from datetime import datetime
 
-import time
+import time, os
+
+# GitHub Secrets에서 값 불러오기
+USERNAME = os.getenv('CLOUDTYPE_ID')  # GitHub Actions에서 주입
+PASSWORD = os.getenv('CLOUDTYPE_PW')
 
 # 헤드리스로 chrome 브라우저 실행
 chrome_options = Options()
@@ -37,10 +41,10 @@ driver.switch_to.window(driver.window_handles[-1])
 try:
     id_field = driver.find_element(By.XPATH, '//*[@id="login_field"]')  # ID 입력 필드 찾기")  
     id_field.clear()  # 기존 텍스트 지우기
-    id_field.send_keys("starnew@kakao.com")  # ID 입력
+    id_field.send_keys(USERNAME)  # ID 입력
     password_field = driver.find_element(By.ID, "password")
     password_field.clear()  # 기존 텍스트 지우기
-    password_field.send_keys("Vari3112##")  # 비밀번호 입력
+    password_field.send_keys(PASSWORD)  # 비밀번호 입력
     commit_button = driver.find_element(By.NAME, "commit")  # 로그인 버튼 찾기
     commit_button.click()  # 로그인 버튼 클릭
 except Exception as e:
