@@ -24,7 +24,7 @@ time.sleep(3)
 try:
     login_button = driver.find_element(By.XPATH, "//*[contains(text(), 'GitHub 계정으로 로그인')]")
     login_button.click()
-    time.sleep(3)
+    time.sleep(10)
     
     # GitHub 로그인
     driver.switch_to.window(driver.window_handles[-1])
