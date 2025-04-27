@@ -1,0 +1,29 @@
+name: CloudType Monitor
+
+on:
+  schedule:
+    - cron: '0 17-20 * * *'  # 한국시간 새벽 2~5시 정각 (UTC 기준)
+    - cron: '30 17-19 * * *' # 한국시간 새벽 2:30~4:30 (UTC 기준)
+  workflow_dispatch: # 수동 실행도 가능
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: 패키지 설치
+        run: pip install -r requirements.txt
+
+      - name: 실행
+        env:
+          GITHUB_ID: ${{ secrets.GITHUB_ID }}
+          GITHUB_PASSWORD: ${{ secrets.GITHUB_PASSWORD }}
+        run: python cloudtype_monitor.py
