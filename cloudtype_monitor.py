@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,7 +12,7 @@ import time
 # 헤드리스로 chrome 브라우저 실행
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # 헤드리스 모드 (브라우저 UI 없이 실행)
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
 # 웹페이지 열기
 driver.get("https://app.cloudtype.io/@unclebob/unclebob:main")
