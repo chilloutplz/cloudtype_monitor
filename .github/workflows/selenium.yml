@@ -18,21 +18,13 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip wget curl unzip xvfb
-          pip3 install selenium webdriver-manager
+          pip3 install -r requirements.txt
 
       - name: Install Google Chrome
         run: |
-          sudo apt install -y wget
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb
           sudo apt --fix-broken install -y
-
-      - name: Install ChromeDriver
-        run: |
-          LATEST_CHROMEDRIVER=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
 
       - name: Start Xvfb
         run: |
@@ -44,5 +36,5 @@ jobs:
           python3 cloudtype_monitor.py
         env:
           DISPLAY: :99.0
-          CHROME_BIN: /usr/bin/google-chrome-stable
-          CHROMEDRIVER_PATH: /usr/local/bin/chromedriver
+          GITHUB_ID: ${{ secrets.CLOUDTYPE_EMAIL }}
+          GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PASSWORD }}
