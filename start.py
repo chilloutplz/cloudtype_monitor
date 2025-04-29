@@ -22,7 +22,7 @@ def get_github_credentials():
 def setup_webdriver():
     """Chrome WebDriver를 설정합니다."""
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
+    chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-notifications")  # 알림 비활성화
@@ -52,11 +52,12 @@ def login_to_github(driver, github_id, github_password):
 
     # 현재 페이지의 HTML 소스 출력
     try:
-        # print(f"{datetime.now()} - 현재 페이지 HTML 소스:")
-        # print(driver.page_source)  # HTML 소스를 출력
-        with open("page_source.html", "w", encoding="utf-8") as file:
+        # 파일 이름에 날짜와 시간 추가
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = f"page_source_{timestamp}.html"
+        with open(file_path, "w", encoding="utf-8") as file:
             file.write(driver.page_source)
-        print(f"{datetime.now()} - HTML 소스가 page_source.html 파일에 저장되었습니다.")
+        print(f"{datetime.now()} - HTML 소스가 {file_path} 파일에 저장되었습니다.")
     except Exception as e:
         print(f"{datetime.now()} - HTML 소스를 가져오는 중 오류 발생: {e}")
 
@@ -146,7 +147,7 @@ def main():
     finally:
         driver.quit()
         print(f"{datetime.now()} - WebDriver가 종료되었습니다.")
-
-
+        
 if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
