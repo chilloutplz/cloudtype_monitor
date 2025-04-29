@@ -126,7 +126,7 @@ def monitor_service(driver):
             print(f"{datetime.now()} - 경고창이 없습니다.")
 
         # 요소가 나타날 때까지 대기
-        elements = WebDriverWait(driver, 60).until(
+        elements = WebDriverWait(driver, 20).until(
             EC.presence_of_all_elements_located(
                 (By.XPATH, "//*[contains(@class, 'bi-play-fill')]")
             )
@@ -145,6 +145,7 @@ def monitor_service(driver):
 
     except Exception as e:
         print(f"{datetime.now()} - 요소 탐색 중 오류 발생: {e}")
+<<<<<<< HEAD
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         file_path = f"error_page_source_{timestamp}.html"
         try:
@@ -153,6 +154,12 @@ def monitor_service(driver):
             print(f"{datetime.now()} - 오류 발생 시 페이지 소스가 {file_path} 파일에 저장되었습니다.")
         except Exception as save_error:
             print(f"{datetime.now()} - 페이지 소스 저장 중 오류 발생: {save_error}")
+=======
+        print(driver.page_source)
+        # with open("debug_page_source.html", "w", encoding="utf-8") as file:
+        #     file.write(driver.page_source)
+        # print(f"{datetime.now()} - 페이지 소스가 debug_page_source.html에 저장되었습니다.")
+>>>>>>> bbdc6eec61e373eecda7755ec3619172730b0731
 
 
 def main():
