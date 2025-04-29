@@ -29,6 +29,7 @@ def setup_webdriver():
 
 def login_to_github(driver, github_id, github_password):
     """GitHub 계정으로 로그인합니다."""
+    print(f"{datetime.now()} - login_to_github 시작")
     driver.get("https://app.cloudtype.io/@unclebob/unclebob:main")
     time.sleep(3)
 
@@ -45,10 +46,12 @@ def login_to_github(driver, github_id, github_password):
     password_field.send_keys(github_password)
     driver.find_element(By.NAME, "commit").click()
     time.sleep(3)
+    print(f"{datetime.now()} - login_to_github 완료")
 
 
 def monitor_service(driver):
     """CloudType 서비스를 모니터링하고 중단 시 재시작합니다."""
+    print(f"{datetime.now()} - monito_service 시작")
     try:
         elements = driver.find_elements(By.CLASS_NAME, "bi-play-fill")
         print(f"{datetime.now()}: 발견된 요소 개수 - {len(elements)}")
