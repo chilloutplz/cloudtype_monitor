@@ -145,6 +145,7 @@ def monitor_service(driver):
                     
     except Exception as e:
         print(f"{datetime.now()} - 요소 탐색 중 오류 발생: {e}")
+        print(dirver.page_source)
         # with open("debug_page_source.html", "w", encoding="utf-8") as file:
         #     file.write(driver.page_source)
         # print(f"{datetime.now()} - 페이지 소스가 debug_page_source.html에 저장되었습니다.")
