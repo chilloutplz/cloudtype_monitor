@@ -37,9 +37,10 @@ def login_to_github(driver, github_id, github_password):
     # 로그인 버튼 대기
     try:
         login_button = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'GitHub 계정으로 로그인')]"))
+            EC.presence_of_element_located(By.XPATH, '//*[@id="page"]/div/div[1]/div/div[2]/div/div[2]/div[1]/a[1]/text()')
         )
         login_button.click()
+        print(f"{datetime.now()} - GitHub 계정으로 로그인 버튼을 클릭했습니다.")
     except Exception as e:
         print(f"{datetime.now()} - 로그인 버튼을 찾을 수 없습니다: {e}")
         return
