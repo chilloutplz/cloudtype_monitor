@@ -114,8 +114,8 @@ def monitor_service(driver):
             print(f"{datetime.now()} - 경고창이 없습니다.")
 
         # 요소가 나타날 때까지 대기
-        elements = WebDriverWait(driver, 30).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, "bi-play-fill"))
+        elements = WebDriverWait(driver, 60).until(
+            EC.visibility_of_all_elements_located((By.CLASS_NAME, "bi-play-fill"))
         )
         print(f"{datetime.now()}: 발견된 요소 개수 - {len(elements)}")
 
