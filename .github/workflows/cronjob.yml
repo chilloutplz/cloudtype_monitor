@@ -28,8 +28,14 @@ jobs:
 
       - name: 실행
         env:
+<<<<<<< HEAD
           GITHUB_ID: ${{ secrets.CLOUDTYPE_EMAIL }}
           GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PASSWORD }}
         run: 
           set -x
           python cloudtype_monitor.py
+=======
+          CLOUDTYPE_ID: ${{ secrets.CLOUDTYPE_ID }}
+          CLOUDTYPE_PW: ${{ secrets.CLOUDTYPE_PW}}
+        run: python cloudtype_monitor.py
+>>>>>>> b9bb1809b418d5082f9ebc0f2a2aa262a692f100
