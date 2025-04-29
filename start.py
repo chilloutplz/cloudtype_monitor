@@ -50,16 +50,16 @@ def login_to_github(driver, github_id, github_password):
         print(f"{datetime.now()} - JavaScript 렌더링 대기 중 오류 발생: {e}")
         return
 
-    # 현재 페이지의 HTML 소스 출력
-    try:
-        # 파일 이름에 날짜와 시간 추가
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        file_path = f"page_source_{timestamp}.html"
-        with open(file_path, "w", encoding="utf-8") as file:
-            file.write(driver.page_source)
-        print(f"{datetime.now()} - HTML 소스가 {file_path} 파일에 저장되었습니다.")
-    except Exception as e:
-        print(f"{datetime.now()} - HTML 소스를 가져오는 중 오류 발생: {e}")
+    # # 현재 페이지의 HTML 소스 출력
+    # try:
+    #     # 파일 이름에 날짜와 시간 추가
+    #     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    #     file_path = f"page_source_{timestamp}.html"
+    #     with open(file_path, "w", encoding="utf-8") as file:
+    #         file.write(driver.page_source)
+    #     print(f"{datetime.now()} - HTML 소스가 {file_path} 파일에 저장되었습니다.")
+    # except Exception as e:
+    #     print(f"{datetime.now()} - HTML 소스를 가져오는 중 오류 발생: {e}")
 
     # 로그인 버튼 대기
     try:
@@ -115,10 +115,11 @@ def monitor_service(driver):
 
         # 요소가 나타날 때까지 대기
         elements = WebDriverWait(driver, 60).until(
-            EC.visibility_of_all_elements_located((By.CLASS_NAME, "bi-play-fill"))
+            EC.presence_of_all_elements_located(
+                (By.XPATH, "//*[contains(@class, 'bi-play-fill')]")
+            )
         )
         print(f"{datetime.now()}: 발견된 요소 개수 - {len(elements)}")
-
 
         for element in elements:
             class_attr = element.get_attribute("class")
@@ -132,6 +133,9 @@ def monitor_service(driver):
                     
     except Exception as e:
         print(f"{datetime.now()} - 요소 탐색 중 오류 발생: {e}")
+        with open("debug_page_source.html", "w", encoding="utf-8") as file:
+            file.write(driver.page_source)
+        print(f"{datetime.now()} - 페이지 소스가 debug_page_source.html에 저장되었습니다.")
 
 
 def main():
@@ -149,5 +153,4 @@ def main():
         print(f"{datetime.now()} - WebDriver가 종료되었습니다.")
         
 if __name__ == "__main__":
-    if __name__ == "__main__":
-        main()
+    main()
