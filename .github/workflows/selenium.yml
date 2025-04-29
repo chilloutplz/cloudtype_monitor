@@ -36,5 +36,5 @@ jobs:
           python3 cloudtype_monitor.py
         env:
           DISPLAY: :99.0
-          GITHUB_ID: ${{ secrets.CLOUDTYPE_EMAIL }}
-          GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PASSWORD }}
+          GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}
+          GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PW }}
