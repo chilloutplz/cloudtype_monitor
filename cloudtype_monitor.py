@@ -4,6 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from datetime import datetime
 import os
@@ -32,22 +33,31 @@ def login_to_github(driver, github_id, github_password):
     """GitHub 계정으로 로그인합니다."""
     print(f"{datetime.now()} - login_to_github 시작")
     driver.get("https://app.cloudtype.io/@unclebob/unclebob:main")
-    time.sleep(3)
 
-    # 로그인 버튼 클릭
-    login_button = driver.find_element(By.XPATH, "//*[contains(text(), 'GitHub 계정으로 로그인')]")
-    login_button.click()
-    time.sleep(3)
+    # 로그인 버튼 대기
+    try:
+        login_button = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'GitHub 계정으로 로그인')]"))
+        )
+        login_button.click()
+    except Exception as e:
+        print(f"{datetime.now()} - 로그인 버튼을 찾을 수 없습니다: {e}")
+        return
 
     # GitHub 로그인
-    driver.switch_to.window(driver.window_handles[-1])
-    username_field = driver.find_element(By.ID, "login_field")
-    username_field.send_keys(github_id)
-    password_field = driver.find_element(By.ID, "password")
-    password_field.send_keys(github_password)
-    driver.find_element(By.NAME, "commit").click()
-    time.sleep(3)
-    print(f"{datetime.now()} - login_to_github 완료")
+    try:
+        driver.switch_to.window(driver.window_handles[-1])
+        username_field = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "login_field"))
+        )
+        username_field.send_keys(github_id)
+
+        password_field = driver.find_element(By.ID, "password")
+        password_field.send_keys(github_password)
+        driver.find_element(By.NAME, "commit").click()
+        print(f"{datetime.now()} - login_to_github 완료")
+    except Exception as e:
+        print(f"{datetime.now()} - GitHub 로그인 중 오류 발생: {e}")
 
 
 def monitor_service(driver):
