@@ -33,7 +33,7 @@ jobs:
 
       - name: Run cloudtype_monitor script
         run: |
-          python3 cloudtype_monitor.py
+          python3 start.py
         env:
           DISPLAY: :99.0
           GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}

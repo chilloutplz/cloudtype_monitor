@@ -34,4 +34,4 @@ jobs:
 
         run: 
           set -x
-          python cloudtype_monitor.py
+          python start.py

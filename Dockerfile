@@ -21,4 +21,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # ENV GITHUB_PASSWORD=your_password_here
 
 # 실행
-CMD ["python", "cloudtype_monitor.py"]
+CMD ["python", "start.py"]
