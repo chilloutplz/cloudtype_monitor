@@ -106,14 +106,14 @@ def monitor_service(driver):
 
     # 현재 창의 개수 출력
     print(f"{datetime.now()} - 현재 창 개수: {len(driver.window_handles)}")
-    
+
     # 현재 창의 인덱스 확인
     current_window_handle = driver.current_window_handle
     window_index = driver.window_handles.index(current_window_handle)
     print(f"{datetime.now()} - 현재 창의 인덱스: {window_index}")
 
     driver.switch_to.window(driver.window_handles[0])
-    
+
     try:
         # 비밀번호 변경 경고창 확인
         try:
@@ -142,12 +142,17 @@ def monitor_service(driver):
                 if 'duration-300' in parent_element.get_attribute("class"):
                     print(f"{datetime.now()} - 서비스가 중단되어 재시작합니다.")
                     parent_element.click()
-                    
+
     except Exception as e:
         print(f"{datetime.now()} - 요소 탐색 중 오류 발생: {e}")
-        # with open("debug_page_source.html", "w", encoding="utf-8") as file:
-        #     file.write(driver.page_source)
-        # print(f"{datetime.now()} - 페이지 소스가 debug_page_source.html에 저장되었습니다.")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = f"error_page_source_{timestamp}.html"
+        try:
+            with open(file_path, "w", encoding="utf-8") as file:
+                file.write(driver.page_source)
+            print(f"{datetime.now()} - 오류 발생 시 페이지 소스가 {file_path} 파일에 저장되었습니다.")
+        except Exception as save_error:
+            print(f"{datetime.now()} - 페이지 소스 저장 중 오류 발생: {save_error}")
 
 
 def main():
