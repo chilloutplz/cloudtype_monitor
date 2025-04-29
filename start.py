@@ -22,7 +22,7 @@ def get_github_credentials():
 def setup_webdriver():
     """Chrome WebDriver를 설정합니다."""
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
+    # chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-notifications")  # 알림 비활성화
@@ -38,8 +38,10 @@ def setup_webdriver():
 def login_to_github(driver, github_id, github_password):
     """GitHub 계정으로 로그인합니다."""
     print(f"{datetime.now()} - login_to_github 시작")
-    driver.get("https://app.cloudtype.io/@unclebob/unclebob:main")
+    # driver.get("https://app.cloudtype.io/@unclebob/unclebob:main")
+    driver.get("https://app.cloudtype.io/@starnew/unclebob:main")
 
+# 
     # JavaScript 렌더링 완료 대기
     try:
         WebDriverWait(driver, 30).until(
@@ -102,6 +104,16 @@ def monitor_service(driver):
     """CloudType 서비스를 모니터링하고 중단 시 재시작합니다."""
     print(f"{datetime.now()} - monitor_service 시작")
 
+    # 현재 창의 개수 출력
+    print(f"{datetime.now()} - 현재 창 개수: {len(driver.window_handles)}")
+    
+    # 현재 창의 인덱스 확인
+    current_window_handle = driver.current_window_handle
+    window_index = driver.window_handles.index(current_window_handle)
+    print(f"{datetime.now()} - 현재 창의 인덱스: {window_index}")
+
+    driver.switch_to.window(driver.window_handles[0])
+    
     try:
         # 비밀번호 변경 경고창 확인
         try:
