@@ -24,12 +24,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: tmate 디버깅 세선 시작
-        uses: mxschmitt/action-tmate@v3
-
-      - name: 실행
         env:
           GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}
           GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PW }}
+          
+        uses: mxschmitt/action-tmate@v3
+
+      - name: 실행
 
         run: 
           set -x
