@@ -22,7 +22,7 @@ def get_github_credentials():
 def setup_webdriver():
     """Chrome WebDriver를 설정합니다."""
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
+    chrome_options.add_argument("--headless")  # 브라우저 UI 없이 실행 (필요 시 활성화)
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-notifications")  # 알림 비활성화
