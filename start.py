@@ -52,16 +52,6 @@ def login_to_github(driver, github_id, github_password):
         print(f"{datetime.now()} - JavaScript 렌더링 대기 중 오류 발생: {e}")
         return
 
-    # # 현재 페이지의 HTML 소스 출력
-    # try:
-    #     # 파일 이름에 날짜와 시간 추가
-    #     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    #     file_path = f"page_source_{timestamp}.html"
-    #     with open(file_path, "w", encoding="utf-8") as file:
-    #         file.write(driver.page_source)
-    #     print(f"{datetime.now()} - HTML 소스가 {file_path} 파일에 저장되었습니다.")
-    # except Exception as e:
-    #     print(f"{datetime.now()} - HTML 소스를 가져오는 중 오류 발생: {e}")
 
     # 로그인 버튼 대기
     try:

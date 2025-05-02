@@ -23,12 +23,12 @@ jobs:
       - name: 패키지 설치
         run: pip install -r requirements.txt
 
-      # - name: tmate 디버깅 세션 시작
-      #   env:
-      #     GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}
-      #     GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PW }}
+      - name: tmate 디버깅 세션 시작
+        env:
+          GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}
+          GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PW }}
 
-      #   uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3
 
       - name: 실행 및 아티팩트 생성
         id: run_script
@@ -39,3 +39,10 @@ jobs:
         run:
           set -x
           python start.py
+
+      - name: 아티팩트 업로드 (오류 발생 시)
+        if: failure() && steps.run_script.outcome != 'cancelled' # 이전 스텝이 실패하고 취소되지 않았을 경우에만 실행
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-page-source
+          path: error_page_source_*.html
