@@ -40,16 +40,6 @@ def login_to_github(driver, github_id, github_password):
     print(f"{datetime.now()} - login_to_github 시작")
     driver.get("https://app.cloudtype.io/@starnew/unclebob:main")
 
-    # 페이지 소스를 저장
-    try:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        file_path = f"page_source_{timestamp}.html"
-        with open(file_path, "w", encoding="utf-8") as file:
-            file.write(driver.page_source)
-        print(f"{datetime.now()} - 페이지 소스가 {file_path} 파일에 저장되었습니다.")
-    except Exception as save_error:
-        print(f"{datetime.now()} - 페이지 소스 저장 중 오류 발생: {save_error}")
-
     # JavaScript 렌더링 완료 대기
     try:
         WebDriverWait(driver, 30).until(
@@ -59,6 +49,16 @@ def login_to_github(driver, github_id, github_password):
     except Exception as e:
         print(f"{datetime.now()} - JavaScript 렌더링 대기 중 오류 발생: {e}")
         return
+
+    # JavaScript 렌더링 완료 후 페이지 소스를 저장
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = f"page_source_{timestamp}.html"
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(driver.page_source)
+        print(f"{datetime.now()} - 페이지 소스가 {file_path} 파일에 저장되었습니다.")
+    except Exception as save_error:
+        print(f"{datetime.now()} - 페이지 소스 저장 중 오류 발생: {save_error}")
 
     # 로그인 버튼 대기
     try:
