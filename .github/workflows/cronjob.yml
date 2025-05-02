@@ -2,8 +2,8 @@ name: CloudType Monitor
 
 on:
   schedule:
-    - cron: '0 17-20 * * *'   # 한국시간 새벽 2~5시 정각 (UTC 기준)
-    - cron: '30 17-19 * * *' # 한국시간 새벽 2:30~4:30 (UTC 기준)
+    - cron: '0 17-21 * * *'   # 한국시간 새벽 2~6시 정각 (UTC 기준)
+    - cron: '30 17-20 * * *'  # 한국시간 새벽 2:30~5:30 (UTC 기준)
   workflow_dispatch: # 수동 실행도 가능
 
 jobs:
@@ -22,13 +22,6 @@ jobs:
 
       - name: 패키지 설치
         run: pip install -r requirements.txt
-
-      - name: tmate 디버깅 세션 시작
-        env:
-          GITHUB_ID: ${{ secrets.CLOUDTYPE_ID }}
-          GITHUB_PASSWORD: ${{ secrets.CLOUDTYPE_PW }}
-
-        uses: mxschmitt/action-tmate@v3
 
       - name: 실행 및 아티팩트 생성
         id: run_script
