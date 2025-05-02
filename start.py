@@ -12,10 +12,10 @@ import time
 
 def get_github_credentials():
     """환경 변수에서 GitHub 로그인 정보를 가져옵니다."""
-    github_id = os.getenv("GITHUB_ID")
-    github_password = os.getenv("GITHUB_PASSWORD")
+    github_id = os.getenv("CLOUDTYPE_ID")
+    github_password = os.getenv("CLOUDTYPE_PW")
     if not github_id or not github_password:
-        raise ValueError("환경 변수 GITHUB_ID와 GITHUB_PASSWORD가 설정되지 않았습니다.")
+        raise ValueError("환경 변수 CLOUDTYPE_ID와 CLOUDTYPE_PW가 설정되지 않았습니다.")
     return github_id, github_password
 
 
