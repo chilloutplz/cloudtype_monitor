@@ -135,12 +135,14 @@ def monitor_service(driver):
 
     except Exception as e:
         print(f"{datetime.now()} - 요소 탐색 중 오류 발생: {e}")
+    finally:
+        # 페이지 소스를 항상 저장
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        file_path = f"error_page_source_{timestamp}.html"
+        file_path = f"page_source_{timestamp}.html"
         try:
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(driver.page_source)
-            print(f"{datetime.now()} - 오류 발생 시 페이지 소스가 {file_path} 파일에 저장되었습니다.")
+            print(f"{datetime.now()} - 페이지 소스가 {file_path} 파일에 저장되었습니다.")
         except Exception as save_error:
             print(f"{datetime.now()} - 페이지 소스 저장 중 오류 발생: {save_error}")
 
