@@ -8,22 +8,8 @@ from datetime import datetime
 import os
 import time
 
-<<<<<<< HEAD
 def setup_driver():
     """Chrome WebDriver 설정"""
-=======
-def get_github_credentials():
-    """환경 변수에서 GitHub 로그인 정보를 가져옵니다."""
-    github_id = os.environ.get("CLOUDTYPE_ID")
-    github_password = os.environ.get("CLOUDTYPE_PW")
-    if not github_id or not github_password:
-        raise ValueError("환경 변수 CLOUDTYPE_ID와 CLOUDTYPE_PW가 설정되지 않았습니다.")
-    return github_id, github_password
-
-
-def setup_webdriver():
-    """Chrome WebDriver를 설정합니다."""
->>>>>>> 32493ca4d884d2979e39d488c9b62d9a8aa11e0c
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")  # GitHub Actions에서는 헤드리스 필수
     chrome_options.add_argument("--no-sandbox")
