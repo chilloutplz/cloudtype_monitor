@@ -8,7 +8,7 @@ on:
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
@@ -29,17 +29,22 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-browser chromium-chromedriver
 
+      - name: Create artifacts directory
+        run: mkdir -p artifacts
+
       - name: Run monitor script
         env:
           CLOUDTYPE_ID: ${{ secrets.CLOUDTYPE_ID }}
           CLOUDTYPE_PW: ${{ secrets.CLOUDTYPE_PW }}
         run: python main.py
 
-      - name: Upload logs (if any)
-        if: always()
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: monitor-logs
+          name: monitor-artifacts
           path: |
-            *.log
-            *.png
+            artifacts/*.log
+            artifacts/*.png
+            artifacts/*.html
+          if-no-files-found: warn  # 파일이 없어도 실패하지 않음
+          retention-days: 3       # 아티팩트 보관 기간(일)
