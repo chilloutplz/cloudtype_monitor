@@ -2,8 +2,14 @@ name: CloudType Monitor
 
 on:
   schedule:
+<<<<<<< HEAD:.github/workflows/cronjob.yml
     - cron: '0,10,20,30 20 * * *'  # UTC 20:00, 20:10, 20:20, 20:30 (한국시간 5:00, 5:10, 5:20, 5:30)
   workflow_dispatch:
+=======
+    - cron: '0,10,20,30 20 * * *'  # UTC 20:00, 20:10, 20:20, 20:30 (한국시간 5:00, 5:10, 5:20,
+
+  workflow_dispatch: # 수동 실행도 가능
+>>>>>>> 32493ca4d884d2979e39d488c9b62d9a8aa11e0c:.github/workflows/cronjob.yml.disabled
 
 jobs:
   monitor:
